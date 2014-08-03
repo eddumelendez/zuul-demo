@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:zuul-spring-client="http://www.devnull.org/schema/zuul-spring-client"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.devnull.org/schema/zuul-spring-client http://www.devnull.org/schema/zuul-spring-client.xsd">
+
+	<context:property-placeholder
+		properties-ref="appDataConfig" />
+
+	<zuul-spring-client:properties config="demo"
+		id="appDataConfig" host="localhost" port="8080" context="/zuul"
+		environment="dev">
+		<zuul-spring-client:file-store />
+		<zuul-spring-client:pbe-decryptor
+			algorithm="PBEWithMD5AndDES" password="12345678" />
+	</zuul-spring-client:properties>
+
+</beans>
