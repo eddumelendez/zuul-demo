@@ -11,11 +11,11 @@
 		properties-ref="appDataConfig" />
 
 	<zuul-spring-client:properties config="demo"
-		id="appDataConfig" host="localhost" port="8080" context="/zuul"
-		environment="dev">
+		id="appDataConfig" host="#{systemProperties['zuul.host']}" port="8080" context="#{systemProperties['zuul.context']}"
+		environment="#{systemProperties['zuul.env']}">
 		<zuul-spring-client:file-store />
 		<zuul-spring-client:pbe-decryptor
-			algorithm="PBEWithMD5AndDES" password="12345678" />
+			algorithm="PBEWithMD5AndDES" password="#{systemProperties['zuul.password']}" />
 	</zuul-spring-client:properties>
 
 </beans>
